@@ -8,8 +8,15 @@
 #' @examples
 #' load_documents
 load_documents <- function(path) {
-  word_files <- readtext::readtext(paste0(path, ".docx"))
-  pdf_files <- readtext::readtext(paste0(path, ".pdf"))
+  if (any(stringr::str_detect(list.files(path), ".pptx"))) {
+    # convert_ppts() # does not do anything yet - docxtractr might be the best package
+    # however, it relies on libre-office!
+  }
+
+  word_files <- readtext::readtext(paste0(path, "/*.docx"))
+  pdf_files <- readtext::readtext(paste0(path, "/*.pdf"))
 
   docs <- rbind(word_files, pdf_files)
+
+  return(docs)
 }

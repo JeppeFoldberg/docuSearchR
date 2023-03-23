@@ -26,9 +26,16 @@ pivot_pages_longer <- function(readtext_object) {
   other_docs <- dplyr::filter(readtext_object, filetype != ".docx")
 
   # extracting each page to new column!
-  doc_docs <- tidyr::separate_wider_delim(doc_docs, text, names_sep = "_p_", delim = "\n")
+  doc_docs <- tidyr::separate_wider_delim(doc_docs,
+                                          text,
+                                          names_sep = "_p_",
+                                          delim = "\n")
   # pivot longer so each text page gets a variable that is the page number!
-  doc_docs <- tidyr::pivot_longer(doc_docs, !c(doc_id, filetype), names_to = "page", values_to = "text")
+  doc_docs <- tidyr::pivot_longer(doc_docs,
+                                  !c(doc_id, filetype),
+                                  names_to = "page",
+                                  values_to = "text")
+
   # cleaning up the page variable
   doc_docs <- dplyr::mutate(doc_docs,
                             page = as.integer(stringr::str_extract(page, "\\d+")))
@@ -38,6 +45,7 @@ pivot_pages_longer <- function(readtext_object) {
 
   other_docs$page <- NA
   all_docs <- rbind(doc_docs, other_docs)
+
   return(all_docs)
 }
 

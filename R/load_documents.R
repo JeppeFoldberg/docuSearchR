@@ -1,12 +1,15 @@
-#' A test function
+#' load_documents - loading word and pdf files for easy reading!
 #'
-#' @param path character vector with the path for the location of word document(s)
+#' @param path character vector with the path for the location of documents
 #'
-#' @return readtext object(s) of the loaded files
+#' @return readtext objects of the loaded files
 #' @export
 #'
 #' @examples
-#' load_word()
-load_word <- function(path) {
-  file <- readtext::readtext(path)
+#' load_documents
+load_documents <- function(path) {
+  word_files <- readtext::readtext(paste0(path, ".docx"))
+  pdf_files <- readtext::readtext(paste0(path, ".pdf"))
+
+  docs <- rbind(word_files, pdf_files)
 }

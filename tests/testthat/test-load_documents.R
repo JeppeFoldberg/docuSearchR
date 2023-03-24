@@ -4,6 +4,6 @@ test_that("loading loads a readtext object of correct length", {
   # test that it loads a readtext object
   expect_s3_class(docs, "readtext")
 
-  # For now it should read in two files!
-  expect_equal(nrow(docs), 2)
+  # For now it should read in three files!
+  expect_equal(nrow(docs), 3)
 })

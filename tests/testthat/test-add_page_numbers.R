@@ -5,12 +5,12 @@ test_that("Adding filetype and exploding pages works!", {
 
   expect_true("filetype" %in% col_names)
 
-  expect_equal(docs$filetype, c(".docx", ".pdf"))
+  expect_equal(docs$filetype, c(".docx", ".docx", ".pdf"))
 
   docs_after <- pivot_pages_longer(docs)
 
   # now we get each word page as a document!
-  expect_equal(nrow(docs_after), nrow(docs) + 2)
+  expect_equal(nrow(docs_after), nrow(docs) + 5)
 
   # test that it is still a readtext object
   expect_s3_class(docs_after, "readtext")

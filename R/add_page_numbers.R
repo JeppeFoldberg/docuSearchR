@@ -26,20 +26,26 @@ pivot_pages_longer <- function(readtext_object) {
   other_docs <- dplyr::filter(readtext_object, filetype != ".docx")
 
   # extracting each page to new column!
-  doc_docs <- tidyr::separate_wider_delim(doc_docs,
-                                          text,
-                                          names_sep = "_p_",
-                                          delim = "\n")
+  doc_docs <- tidyr::separate_longer_delim(doc_docs,
+                                           text,
+                                           delim = "\n")
+  # adding id to each page!
+  doc_docs$page <- with(doc_docs, ave(rep(1, nrow(doc_docs)), doc_id, FUN = seq_along))
 
-  # pivot longer so each text page gets a variable that is the page number!
-  doc_docs <- tidyr::pivot_longer(doc_docs,
-                                  !c(doc_id, filetype),
-                                  names_to = "page",
-                                  values_to = "text")
+  # doc_docs <- tidyr::separate_wider_delim(doc_docs,
+  #                                         text,
+  #                                         names_sep = "_p_",
+  #                                         delim = "\n")
+  #
+  # # pivot longer so each text page gets a variable that is the page number!
+  # doc_docs <- tidyr::pivot_longer(doc_docs,
+  #                                 !c(doc_id, filetype),
+  #                                 names_to = "page",
+  #                                 values_to = "text")
 
   # cleaning up the page variable
-  doc_docs <- dplyr::mutate(doc_docs,
-                            page = as.integer(stringr::str_extract(page, "\\d+")))
+  # doc_docs <- dplyr::mutate(doc_docs,
+  #                           page = as.integer(stringr::str_extract(page, "\\d+")))
 
   # coercing back to readtext object!
   class(doc_docs) <- c("readtext", "data.frame")

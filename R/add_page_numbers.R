@@ -30,6 +30,7 @@ pivot_pages_longer <- function(readtext_object) {
                                           text,
                                           names_sep = "_p_",
                                           delim = "\n")
+
   # pivot longer so each text page gets a variable that is the page number!
   doc_docs <- tidyr::pivot_longer(doc_docs,
                                   !c(doc_id, filetype),

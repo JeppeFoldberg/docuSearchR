@@ -2,18 +2,18 @@
 % Please edit documentation in R/load_documents.R
 \name{load_documents}
 \alias{load_documents}
-\title{A test function}
+\title{load_documents - loading word and pdf files for easy reading!}
 \usage{
 load_documents(path)
 }
 \arguments{
-\item{path}{character vector with the path for the location of document(s)}
+\item{path}{character vector with the path for the location of documents}
 }
 \value{
-readtext object(s) of the loaded files
+readtext objects of the loaded files
 }
 \description{
-A test function
+load_documents - loading word and pdf files for easy reading!
 }
 \examples{
 load_documents

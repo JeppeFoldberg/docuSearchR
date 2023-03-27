@@ -20,3 +20,15 @@ load_documents <- function(path) {
 
   return(docs)
 }
+
+#' Convert to corpus for easy searching
+#'
+#' @param readtext_object a readtext s3 class created by load_documents
+#'
+#' @return quanteda corpus
+#' @export
+#'
+#' @examples
+convert_to_corpus <- function(readtext_object) {
+  corpus <- quanteda::corpus(readtext_object, unique_docnames = F)
+}

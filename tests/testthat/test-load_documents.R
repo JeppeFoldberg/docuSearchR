@@ -1,5 +1,5 @@
 test_that("loading loads a readtext object of correct length", {
-  docs <- load_documents("../data")
+  docs <- load_documents_recursive("../data")
 
   # test that it loads a readtext object
   expect_s3_class(docs, "readtext")
@@ -9,13 +9,13 @@ test_that("loading loads a readtext object of correct length", {
 })
 
 test_that("converting to corpus works", {
-  docs <- load_documents("../data")
+  docs <- load_documents_recursive("../data")
 
   # test that it loads a readtext object
   expect_s3_class(docs, "readtext")
 
   docs <- convert_to_corpus(docs)
 
-  expect_s3_class(docs, "corpus")
+  expect_s3_class(docs, "tokens")
 
 })

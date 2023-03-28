@@ -10,7 +10,7 @@ convert_to_corpus(readtext_object)
 \item{readtext_object}{a readtext s3 class created by load_documents}
 }
 \value{
-quanteda corpus
+quanteda tokenized corpus
 }
 \description{
 Convert to corpus for easy searching

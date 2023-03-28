@@ -27,9 +27,10 @@ pivot_pages_longer <- function(readtext_object) {
   doc_docs <- dplyr::filter(readtext_object, .data$filetype == ".docx")
   other_docs <- dplyr::filter(readtext_object, .data$filetype != ".docx")
 
-  # extracting each page to new column!
+  # extracting each page to new column! .data selector is depreceated in tidyselect
+  # but not in dplyr above :(
   doc_docs <- tidyr::separate_longer_delim(doc_docs,
-                                           .data$text,
+                                           "text",
                                            delim = "\n")
   # adding id to each page!
   doc_docs$page <- with(doc_docs, ave(rep(1, nrow(doc_docs)), doc_id, FUN = seq_along))

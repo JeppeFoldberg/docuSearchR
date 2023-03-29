@@ -6,7 +6,8 @@
 #'
 #' @importFrom rlang .data
 read_excel <- function(path) {
-  cells <- tidyxl::xlsx_cells(path)
+  cells <- tidyxl::xlsx_cells(path,
+                              sheets = c(1L)) # change this to na later and implement combining sheets and adress into one page varible
 
   character_cells <- dplyr::filter(cells, !is.na(character))
 
@@ -119,7 +120,7 @@ load_documents_recursive <- function(path) {
 #' @return quanteda tokenized corpus
 convert_to_tokens <- function(readtext_object) {
   # # simply having a column named doc_id is not enough for quanteda...
-  rownames(readtext_object) <- readtext_object$doc_id
+  # rownames(readtext_object) <- readtext_object$doc_id
   corpus <- quanteda::corpus(readtext_object)
   corpus <- quanteda::tokens(corpus)
 }

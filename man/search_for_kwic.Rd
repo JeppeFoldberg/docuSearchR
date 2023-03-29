@@ -4,14 +4,19 @@
 \alias{search_for_kwic}
 \title{Using quantedas kwic to search for the keyword in context!}
 \usage{
-search_for_kwic(tokens, pattern, ...)
+search_for_kwic(tokens, pattern, window = 10, ...)
 }
 \arguments{
-\item{tokens}{tokens object created with convert_to_corpus}
+\item{tokens}{tokens object created with convert_to_tokens}
 
 \item{pattern}{regex to search for}
 
+\item{window}{amount of surrounding tokens to get as context}
+
 \item{...}{additional parameters passed to kwic!}
+}
+\value{
+searching for a single keyword
 }
 \description{
 Using quantedas kwic to search for the keyword in context!

@@ -1,14 +1,11 @@
 #' Using quantedas kwic to search for the keyword in context!
 #'
-#' @param tokens tokens object created with convert_to_corpus
+#' @param tokens tokens object created with convert_to_tokens
 #' @param pattern regex to search for
 #' @param ... additional parameters passed to kwic!
 #' @param window amount of surrounding tokens to get as context
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @return searching for a single keyword
 search_for_kwic <- function(tokens, pattern, window = 10, ...) {
   matches <- quanteda::kwic(tokens, pattern, window = window, ...)
 }
@@ -22,9 +19,6 @@ search_for_kwic <- function(tokens, pattern, window = 10, ...) {
 #' @param ... additional parameters passed to quanteda::kwic
 #'
 #' @return kwic match dataframe
-#' @export
-#'
-#' @examples
 search_for_kws <- function(tokens, patterns, window = 10, ...) {
   results <- list()
 
@@ -34,4 +28,25 @@ search_for_kws <- function(tokens, patterns, window = 10, ...) {
   }
 
   results <- dplyr::bind_rows(results)
+}
+
+
+#' simplify kwic dataframe for the end user
+#'
+#' @param kwic - kwic dataframe created by search_for_kws
+#'
+#' @return a simplified data frame with a docname-page, the matched sentence and the search pattern!
+#'
+#' @importFrom rlang .data
+simplify_kwic <- function(kwic) {
+  kwic <- dplyr::as_tibble(kwic)
+
+  kwic <- dplyr::mutate(kwic,
+                        sentence = paste(kwic$pre, kwic$keyword, kwic$post))
+
+  kwic <- dplyr::select(kwic,
+                        "docname",
+                        "sentence",
+                        "pattern"
+                        )
 }

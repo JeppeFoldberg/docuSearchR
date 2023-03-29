@@ -11,10 +11,9 @@ load_documents(path)
 }
 \value{
 readtext objects of the loaded files
+
+load_documents
 }
 \description{
 load_documents - loading word and pdf files for easy reading!
-}
-\examples{
-load_documents
 }

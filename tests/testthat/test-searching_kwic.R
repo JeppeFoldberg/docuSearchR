@@ -22,7 +22,7 @@ test_that("Simplifying kwic dataframe for easy reading", {
   )
 
   goal <- dplyr::tibble(
-    docname = c("ja", "nej"),
+    docname = c("ja.NA", "nej.A2"),
     page = c("NA", "A2"),
     sentence = c("sentence before keyword sentence after",
                  "still the sentence before keyword still the sentence after"),

@@ -12,7 +12,7 @@ test_that("Searching works", {
 
 test_that("Simplifying kwic dataframe for easy reading", {
   kwic <- dplyr::tibble(
-    docname = c("ja", "nej"),
+    docname = c("ja.NA", "nej.A2"),
     from = c(1L, 2L),
     to = c(1L, 2L),
     pre = c("sentence before", "still the sentence before"),
@@ -23,6 +23,7 @@ test_that("Simplifying kwic dataframe for easy reading", {
 
   goal <- dplyr::tibble(
     docname = c("ja", "nej"),
+    page = c("NA", "A2"),
     sentence = c("sentence before keyword sentence after",
                  "still the sentence before keyword still the sentence after"),
     pattern = c("regex1", "regex2")

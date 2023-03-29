@@ -106,6 +106,10 @@ load_documents_recursive <- function(path) {
 
   docs <- add_filetype(results)
   docs <- pivot_pages_longer(docs)
+
+  # collapsing page_number into the doc_id - later we will extract it to its own column
+  docs <- dplyr::mutate(docs,
+                        "doc_id" =  paste(docs$doc_id, docs$page, sep = "."))
 }
 
 #' Convert to tokens for easy searching
@@ -114,7 +118,7 @@ load_documents_recursive <- function(path) {
 #'
 #' @return quanteda tokenized corpus
 convert_to_tokens <- function(readtext_object) {
-  corpus <- quanteda::corpus(readtext_object, unique_docnames = F)
+  corpus <- quanteda::corpus(readtext_object)
   corpus <- quanteda::tokens(corpus)
 }
 

@@ -43,7 +43,7 @@ simplify_kwic <- function(kwic) {
 
   kwic <- dplyr::mutate(kwic,
                         sentence = paste(kwic$pre, kwic$keyword, kwic$post),
-                        # docname = stringr::str_remove(kwic$docname, "\\.\\w?\\w?\\d?\\d?$"),
+                        docname = stringr::str_remove(kwic$docname, "\\.\\w?\\w?\\d?\\d?$"),
                         # docname = stringr::str_extract(kwic$docname, "(=?\\.\\w?\\w?\\d\\d?$)"),
                         page = stringr::str_extract(kwic$docname, "\\w?\\w?\\d\\d?$"))
 
